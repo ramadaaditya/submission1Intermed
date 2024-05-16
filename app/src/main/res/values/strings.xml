@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="title_signup_page">Complete your data below</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Please enter your data first</string>
+    <string name="title_login_page">Ready to share your story?</string>
+    <string name="name">Name</string>
+    <string name="image_signup">Image Sign Up</string>
+    <string name="title_menu_1">Find inspiration from\n daily stories</string>
+    <string name="title_menu_2">Share your special moments</string>
+    <string name="title_menu_3">Happiness is part of\n every story we have</string>
+    <string name="register">Register</string>
+    <string name="add_button">Add Story</string>
+    <string name="profile">Profile</string>
+    <string name="camera">Camera</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="gallery">Gallery</string>
+    <string name="preview">Preview Image</string>
+    <string name="image_detail">Image Detail</string>
+    <string name="upload_success">Upload Successful</string>
+    <string name="upload_failed">Upload Failed</string>
+    <string name="logout">Logout</string>
+    <string name="change_language">Change Language</string>
+
+</resources>

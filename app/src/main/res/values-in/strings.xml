@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="message_login_page">Masukkan dulu datamu</string>
+    <string name="title_login_page">Sudah siap untuk berbagi cerita?</string>
+    <string name="name">Nama</string>
+    <string name="image_signup">Gambar Pendaftaran</string>
+    <string name="title_menu_1">Temukan inspirasi dari\n cerita-cerita harian</string>
+    <string name="title_menu_2">Bagikan momen spesialmu</string>
+    <string name="title_menu_3">Kebahagiaan adalah bagian dari\n setiap cerita kita</string>
+    <string name="register">Daftar</string>
+    <string name="add_button">Tambah Cerita</string>
+    <string name="profile">Profil</string>
+    <string name="camera">Kamera</string>
+    <string name="description">Deskripsi</string>
+    <string name="save">Simpan</string>
+    <string name="gallery">Galeri</string>
+    <string name="preview">Pratinjau Gambar</string>
+    <string name="image_detail">Detail Gambar</string>
+    <string name="upload_success">Unggah Berhasil</string>
+    <string name="upload_failed">Unggah Gagal</string>
+    <string name="logout">Keluar</string>
+    <string name="change_language">Ubah Bahasa</string>
+
+</resources>
