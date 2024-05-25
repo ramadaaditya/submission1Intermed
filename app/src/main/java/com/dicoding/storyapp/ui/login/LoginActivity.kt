@@ -61,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                     showLoading(false)
                     handleSuccess(response.data)
                 }
+
                 else -> showLoading(false)
             }
         }
@@ -80,6 +81,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToHome() {
         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
     }

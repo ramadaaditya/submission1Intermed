@@ -25,5 +25,16 @@
     <string name="upload_failed">Upload Failed</string>
     <string name="logout">Logout</string>
     <string name="change_language">Change Language</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="mapsuser">MapsUser</string>
+
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+    <string name="add_your_location">Add your current location ?</string>
+    <string name="retry">Try Again</string>
+    <string name="password_alert">Password Cannot less than 8 Character</string>
+
 
 </resources>

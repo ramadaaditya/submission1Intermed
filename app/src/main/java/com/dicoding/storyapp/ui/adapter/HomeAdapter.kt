@@ -1,18 +1,18 @@
-package com.dicoding.storyapp.ui.home
+package com.dicoding.storyapp.ui.adapter
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.storyapp.data.remote.response.ListStoryItem
 import com.dicoding.storyapp.databinding.ItemStoryBinding
 import com.dicoding.storyapp.ui.detail.DetailActivity
 
-class HomeAdapter : ListAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class HomeAdapter : PagingDataAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
     inner class MyViewHolder(private val binding: ItemStoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

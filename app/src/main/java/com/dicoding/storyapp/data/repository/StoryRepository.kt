@@ -2,16 +2,20 @@ package com.dicoding.storyapp.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.dicoding.storyapp.preference.SettingPreferences
 import com.dicoding.storyapp.data.UserModel
 import com.dicoding.storyapp.data.ResultState
+import com.dicoding.storyapp.data.StoryPagingSource
 import com.dicoding.storyapp.data.remote.api.ApiConfig
 import com.dicoding.storyapp.data.remote.api.ApiService
 import com.dicoding.storyapp.data.remote.response.ListStoryItem
 import com.dicoding.storyapp.data.remote.response.LoginResponse
 import com.dicoding.storyapp.data.remote.response.MessageResponse
 import com.google.gson.Gson
-import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -25,14 +29,6 @@ class StoryRepository private constructor(
 ) {
     private suspend fun saveSession(user: UserModel) {
         pref.saveSession(user)
-    }
-
-    fun getSession(): Flow<UserModel> {
-        return pref.getSession()
-    }
-
-    suspend fun logout() {
-        pref.logout()
     }
 
     suspend fun register(
@@ -50,7 +46,6 @@ class StoryRepository private constructor(
                 ResultState.Success(response)
             }
         } catch (e: HttpException) {
-            //get error message
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, MessageResponse::class.java)
             val errorMessage = errorBody.message
@@ -68,10 +63,9 @@ class StoryRepository private constructor(
                 isLogin = true
             )
             saveSession(session)
-            ApiConfig.token = session.token
+            ApiConfig.getApiService(session.token)
             ResultState.Success(response)
         } catch (e: HttpException) {
-            // Handle HTTP exception
             val jsonInString = e.response()?.errorBody()?.string()
             val errorBody = Gson().fromJson(jsonInString, MessageResponse::class.java)
             val errorMessage = errorBody.message ?: "Unknown error"
@@ -79,19 +73,17 @@ class StoryRepository private constructor(
         }
     }
 
-    fun getStories(): LiveData<ResultState<List<ListStoryItem>>> =
-        liveData {
-            emit(ResultState.Loading)
-            try {
-                val response = apiService.getStories()
-                val nonNullList = response.listStory?.mapNotNull { it } ?: emptyList()
-                emit(ResultState.Success(nonNullList))
-            } catch (e: HttpException) {
-                val error = e.response()?.errorBody()?.string()
-                val body = Gson().fromJson(error, MessageResponse::class.java)
-                emit(ResultState.Error(body?.message ?: "Error"))
-            }
-        }
+    fun getStories(): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { StoryPagingSource(apiService) }
+        ).liveData
+    }
+
+    suspend fun getStoriesWithLocation() = apiService.getStoriesWithLocation()
 
     fun uploadStories(
         imageFile: File,

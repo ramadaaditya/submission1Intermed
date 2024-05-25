@@ -4,14 +4,21 @@ import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
+import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import androidx.exifinterface.media.ExifInterface
 import com.dicoding.storyapp.BuildConfig
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -105,4 +112,21 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap {
     return Bitmap.createBitmap(
         source, 0, 0, source.width, source.height, matrix, true
     )
+}
+
+fun vectorToBitmap(@DrawableRes id: Int, context :AppCompatActivity): BitmapDescriptor {
+    val vectorDrawable = ResourcesCompat.getDrawable(context.resources, id, null)
+    if (vectorDrawable == null) {
+        Log.e("BitmapHelper", "Resource not found")
+        return BitmapDescriptorFactory.defaultMarker()
+    }
+    val bitmap = Bitmap.createBitmap(
+        vectorDrawable.intrinsicWidth,
+        vectorDrawable.intrinsicHeight,
+        Bitmap.Config.ARGB_8888
+    )
+    val canvas = Canvas(bitmap)
+    vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
+    vectorDrawable.draw(canvas)
+    return BitmapDescriptorFactory.fromBitmap(bitmap)
 }
